@@ -3,8 +3,10 @@ package modelos.entidades;
 import java.time.LocalDate;
 
 public class Livro {
+
+    private int id;
     private String titulo;
-    private String autor;
+    private Autor autor;
     private LocalDate dataPublicacao;
     private Long isbn;
     private String genero;
@@ -13,7 +15,17 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(String titulo, String autor, LocalDate dataPublicacao, Long isbn, String genero, int quantidade) {
+    public Livro(String titulo, Autor autor, LocalDate dataPublicacao, Long isbn, String genero, int quantidade) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.dataPublicacao = dataPublicacao;
+        this.isbn = isbn;
+        this.genero = genero;
+        this.quantidade = quantidade;
+    }
+
+    public Livro(int id, String titulo, Autor autor, LocalDate dataPublicacao, Long isbn, String genero, int quantidade) {
+        this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.dataPublicacao = dataPublicacao;
@@ -30,11 +42,11 @@ public class Livro {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
@@ -68,5 +80,13 @@ public class Livro {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
