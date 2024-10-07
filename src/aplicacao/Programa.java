@@ -74,7 +74,8 @@ public class Programa {
                 case 4:
                     EmprestimoServico emprestimoServico = new EmprestimoServico();
                     System.out.println("\n1) Cadastrar Emprestimo");
-                    System.out.println("2) Imprimir Emprestimos");
+                    System.out.println("2) Fazer Devolucao");
+                    System.out.println("3) Imprimir Emprestimos");
 
                     n = sc.nextInt();
 
@@ -82,6 +83,9 @@ public class Programa {
                         emprestimoServico.cadastrarEmprestimo();
                     }
                     if (n == 2) {
+                        emprestimoServico.fazerDevolucao();
+                    }
+                    if (n == 3) {
                         emprestimoServico.listarEmprestimos();
                     }
                     break;
