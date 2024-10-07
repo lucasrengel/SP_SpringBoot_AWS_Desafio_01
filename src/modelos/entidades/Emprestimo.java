@@ -2,6 +2,7 @@ package modelos.entidades;
 
 import modelos.enumeracoes.EstadoEmprestimo;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,28 +14,26 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private EstadoEmprestimo estado;
-    private double multa;
-
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private BigDecimal multa;
 
     public Emprestimo() {
     }
 
-    public Emprestimo(Livro livro, Membro membro, String dataEmprestimoStr, String dataDevolucaoStr, EstadoEmprestimo estado, double multa) {
+    public Emprestimo(Livro livro, Membro membro, LocalDate dataEmprestimo, LocalDate dataDevolucao, EstadoEmprestimo estado, BigDecimal multa) {
         this.livro = livro;
         this.membro = membro;
-        this.dataEmprestimo = LocalDate.parse(dataEmprestimoStr, formatter);
-        this.dataDevolucao = LocalDate.parse(dataDevolucaoStr, formatter);
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
         this.estado = estado;
         this.multa = multa;
     }
 
-    public Emprestimo(int id, Livro livro, Membro membro, String dataEmprestimoStr, String dataDevolucaoStr, EstadoEmprestimo estado, double multa) {
+    public Emprestimo(int id, Livro livro, Membro membro, LocalDate dataEmprestimo, LocalDate dataDevolucao, EstadoEmprestimo estado, BigDecimal multa) {
         this.id = id;
         this.livro = livro;
         this.membro = membro;
-        this.dataEmprestimo = LocalDate.parse(dataEmprestimoStr, formatter);
-        this.dataDevolucao = LocalDate.parse(dataDevolucaoStr, formatter);
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
         this.estado = estado;
         this.multa = multa;
     }
@@ -87,11 +86,24 @@ public class Emprestimo {
         this.estado = estado;
     }
 
-    public double getMulta() {
+    public BigDecimal getMulta() {
         return multa;
     }
 
-    public void setMulta(double multa) {
+    public void setMulta(BigDecimal multa) {
         this.multa = multa;
+    }
+
+    @Override
+    public String toString() {
+        return "Emprestimo{" +
+                "id=" + id +
+                ", livro=" + this.livro.getTitulo() +
+                ", membro=" + this.membro.getNome() +
+                ", dataEmprestimo=" + dataEmprestimo +
+                ", dataDevolucao=" + dataDevolucao +
+                ", estado=" + estado +
+                ", multa=" + multa +
+                '}';
     }
 }
