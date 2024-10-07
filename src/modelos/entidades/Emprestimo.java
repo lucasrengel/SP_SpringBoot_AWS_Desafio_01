@@ -1,5 +1,7 @@
 package modelos.entidades;
 
+import modelos.enumeracoes.EstadoEmprestimo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
