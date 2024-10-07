@@ -1,4 +1,4 @@
-package modelos.entidades;
+package modelos.enumeracoes;
 
 public enum EstadoEmprestimo {
 
