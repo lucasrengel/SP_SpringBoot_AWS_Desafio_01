@@ -19,17 +19,17 @@ public class Membro extends Pessoa {
     public Membro() {
     }
 
-    public Membro(String nome, String dataStr, String email, String telefone, String endereco) {
+    public Membro(String nome, LocalDate dataAssociacao, String email, String telefone, String endereco) {
         super(nome);
-        this.dataAssociacao = LocalDate.parse(dataStr, formatter);
+        this.dataAssociacao = dataAssociacao;
         this.email = email;
         this.telefone = telefone;
         this.endereco = endereco;
     }
 
-    public Membro(int id, String nome, String dataStr, String email, String telefone, String endereco) {
+    public Membro(int id, String nome, LocalDate dataAssociacao, String email, String telefone, String endereco) {
         super(id, nome);
-        this.dataAssociacao = LocalDate.parse(dataStr, formatter);
+        this.dataAssociacao = dataAssociacao;
         this.email = email;
         this.telefone = telefone;
         this.endereco = endereco;
@@ -82,5 +82,12 @@ public class Membro extends Pessoa {
 
     public void setEmprestimos(List<Emprestimo> emprestimos) {
         this.emprestimos = emprestimos;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Data de associacao: " +
+                getDataAssociacao() + ", Email: " + getEmail() +
+                ", Telefone: " + getTelefone() + ", Endereco: " + getEndereco() + ".\n";
     }
 }
