@@ -83,6 +83,7 @@ public class LivroRepositorio {
             res.next();
 
             objeto.setTitulo(res.getString("titulo"));
+            objeto.setQuantidade(res.getInt("quantidade"));
 
             stmt.close();
 
