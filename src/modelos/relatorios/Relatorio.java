@@ -1,4 +1,7 @@
 package modelos.relatorios;
 
-public class Relatorio {
+public interface Relatorio {
+
+    void gerarRelatorio();
+
 }
