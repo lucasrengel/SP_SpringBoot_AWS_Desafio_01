@@ -2,14 +2,13 @@ package aplicacao;
 
 import bd.BD;
 import modelos.servicos.AutorServico;
+import modelos.servicos.EmprestimoServico;
 import modelos.servicos.LivroServico;
 import modelos.servicos.MembroServico;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Programa {
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static void main(String[] args) {
         BD.getConexao();
@@ -73,13 +72,27 @@ public class Programa {
                     }
                     break;
                 case 4:
+                    EmprestimoServico emprestimoServico = new EmprestimoServico();
+                    System.out.println("\n1) Cadastrar Emprestimo");
+                    System.out.println("2) Imprimir Emprestimos");
+
+                    n = sc.nextInt();
+
+                    if (n == 1) {
+                        emprestimoServico.cadastrarEmprestimo();
+                    }
+                    if (n == 2) {
+                        emprestimoServico.listarEmprestimos();
+                    }
+                    break;
+                case 5:
                     System.out.println("Saindo do programa...");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
 
-            System.out.println(); // Linha em branco para separar cada iteração
+            System.out.println();
         }
 
 
