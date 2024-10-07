@@ -71,4 +71,24 @@ public class LivroRepositorio {
             throw new RuntimeException(erro);
         }
     }
+
+    public Livro buscaPorId(int id) {
+
+        Livro objeto = new Livro();
+        objeto.setId(id);
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_livros WHERE id = " + id);
+            res.next();
+
+            objeto.setTitulo(res.getString("titulo"));
+
+            stmt.close();
+
+        } catch (SQLException erro) {
+            throw new RuntimeException(erro);
+        }
+        return objeto;
+    }
 }

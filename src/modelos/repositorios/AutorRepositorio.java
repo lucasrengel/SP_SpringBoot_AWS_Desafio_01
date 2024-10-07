@@ -77,12 +77,7 @@ public class AutorRepositorio {
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_autores WHERE id = " + id);
             res.next();
 
-            String nome = res.getString("nome");
-            LocalDate dataNascimento = res.getDate("dataNascimento").toLocalDate();
-            String nacionalidade = res.getString("nacionalidade");
-            String biografia = res.getString("biografia");
-
-            objeto.setNome(nome);
+            objeto.setNome(res.getString("nome"));
 
             stmt.close();
 
