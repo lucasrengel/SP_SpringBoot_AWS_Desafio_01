@@ -1,6 +1,7 @@
 package modelos.repositorios;
 
 import bd.BD;
+import modelos.entidades.Livro;
 import modelos.entidades.Membro;
 
 import java.sql.*;
@@ -67,5 +68,25 @@ public class MembroRepositorio {
         } catch (SQLException erro) {
             throw new RuntimeException(erro);
         }
+    }
+
+    public Membro buscaPorId(int id) {
+
+        Membro objeto = new Membro();
+        objeto.setId(id);
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_membros WHERE id = " + id);
+            res.next();
+
+            objeto.setNome(res.getString("nome"));
+
+            stmt.close();
+
+        } catch (SQLException erro) {
+            throw new RuntimeException(erro);
+        }
+        return objeto;
     }
 }
