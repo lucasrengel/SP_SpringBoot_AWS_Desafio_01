@@ -82,4 +82,67 @@ public class EmprestimoRepositorio {
             throw new RuntimeException(erro);
         }
     }
+
+    public boolean devolucao(Emprestimo objeto) {
+        String sql = "UPDATE tb_emprestimos SET dataDevolucao = ?, estado = ?, multa = ? WHERE id = ?";
+
+        try {
+            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+
+            stmt.setString(1, objeto.getDataDevolucao().toString());
+            stmt.setString(2, objeto.getEstado().toString());
+            stmt.setBigDecimal(3, objeto.getMulta());
+            stmt.setInt(4, objeto.getId());
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+        } catch (SQLException erro) {
+            throw new RuntimeException(erro);
+        }
+    }
+
+    public boolean atualiza(Emprestimo objeto) {
+        String sql = "UPDATE tb_emprestimos SET estado = ?, multa = ? WHERE id = ?";
+
+        try {
+            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+
+            stmt.setString(1, objeto.getEstado().toString());
+            stmt.setBigDecimal(2, objeto.getMulta());
+            stmt.setInt(3, objeto.getId());
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+        } catch (SQLException erro) {
+            throw new RuntimeException(erro);
+        }
+    }
+
+    public Emprestimo buscaPorId(int id) {
+
+        Emprestimo objeto = new Emprestimo();
+        objeto.setId(id);
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos WHERE id = " + id);
+            res.next();
+
+            objeto.setLivro(livroRepositorio.buscaPorId(res.getInt("id_livro")));
+            objeto.setMembro(membroRepositorio.buscaPorId(res.getInt("id_membro")));
+            objeto.setDataEmprestimo(LocalDate.parse(res.getString("dataEmprestimo")));
+            objeto.setEstado(EstadoEmprestimo.valueOf(res.getString("estado")));
+            objeto.setMulta(res.getBigDecimal("multa"));
+
+            stmt.close();
+
+        } catch (SQLException erro) {
+            throw new RuntimeException(erro);
+        }
+        return objeto;
+    }
 }
