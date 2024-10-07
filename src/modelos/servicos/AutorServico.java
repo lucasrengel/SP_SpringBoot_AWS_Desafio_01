@@ -1,72 +1,65 @@
 package modelos.servicos;
 
-import bd.BD;
+import excecoes.Mensagem;
 import modelos.entidades.Autor;
+import modelos.repositorios.AutorRepositorio;
 
-import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
 public class AutorServico {
 
-    public static ArrayList<Autor> minhaLista = new ArrayList<>();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final AutorRepositorio autorRepositorio = new AutorRepositorio();
 
-
-    private Connection getConexao(){
-        return BD.getConexao();
+    public void listarAutores(){
+        if(autorRepositorio.getMinhaLista().isEmpty()){
+            System.out.println("\nNenhum Autor cadastrado");
+            return;
+        }
+        for(Object a: AutorRepositorio.minhaLista) {
+            System.out.println(a);
+        }
     }
 
-    //retorna a lista de amigos
-    public ArrayList<Autor> getMinhaLista() {
-
-        minhaLista.clear();
-
+    public void cadastrarAutor(){
+        Scanner sc = new Scanner(System.in);
         try {
-            Statement stmt = this.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM tb_autores");
-            while (res.next()) {
+            System.out.println("Digite o nome do autor: ");
+            String nome = sc.nextLine();
+            System.out.println("Digite a data de nascimento: ");
+            String dataNascimentoStr  = sc.nextLine();
+            System.out.println("Digite a nacionalidade: ");
+            String nacionalidade = sc.nextLine();
+            System.out.println("Digite a biografia: ");
+            String biografia = sc.nextLine();
 
-                int id = res.getInt("id");
-                String nome = res.getString("nome");
-                LocalDate dataNascimento = res.getDate("dataNascimento").toLocalDate();
-                String nacionalidade = res.getString("nacionalidade");
-                String biografia = res.getString("biografia");
-
-                Autor objeto = new Autor( id,  nome,  dataNascimento,  nacionalidade,  biografia);
-
-                minhaLista.add(objeto);
+            if (nome.length() < 2) {
+                throw new Mensagem("Nome deve conter ao menos 2 caracteres");
             }
 
-            stmt.close();
+            LocalDate dataNascimento;
+            try {
+                dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+            } catch (DateTimeParseException e) {
+                throw new Mensagem("Formato de data inválido. Use dd/MM/yyyy.");
+            }
 
-        } catch (SQLException erro) {
-            throw new RuntimeException(erro);
-        }
+            for (Autor a : autorRepositorio.getMinhaLista()) {
+                if (a.getNome().equalsIgnoreCase(nome)) {
+                    throw new Mensagem("Esse autor já está cadastrado!");
+                }
+            }
 
-        return minhaLista;
-    }
+            Autor autor = new Autor(nome, dataNascimento, nacionalidade, biografia);
 
-    public boolean cadastraAutor(Autor objeto) {
-        String sql = "INSERT INTO tb_autores(id,nome,dataNascimento, nacionalidade, biografia) VALUES(?,?,?,?,?)";
-
-        try {
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
-
-            stmt.setInt(1, objeto.getId());
-            stmt.setString(2, objeto.getNome());
-            stmt.setDate(3, Date.valueOf(objeto.getDataNascimento()));
-            stmt.setString(4, objeto.getNacionalidade());
-            stmt.setString(5, objeto.getBiografia());
-
-            stmt.execute();
-            stmt.close();
-
-            return true;
-
-        } catch (SQLException erro) {
-            throw new RuntimeException(erro);
+            if (autorRepositorio.salvar(autor)) {
+                System.out.println("Autor cadastrado com sucesso");
+            }
+        } catch (Mensagem erro) {
+            System.out.println(erro.getMessage());
         }
     }
 }
