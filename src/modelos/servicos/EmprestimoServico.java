@@ -35,23 +35,19 @@ public class EmprestimoServico {
             System.out.print("Digite a data do emprestimo(dd/MM/yyyy): ");
             sc.nextLine();
             String dataEmprestimoStr = sc.nextLine();
-            System.out.print("Digite a data da devolucao(dd/MM/yyyy): ");
-            String dataDevolucaoStr = sc.nextLine();
-            System.out.print("Digite o estado(ATIVO, CONCLUIDO, ATRASADO): ");
-            EstadoEmprestimo estado = EstadoEmprestimo.valueOf(sc.next());
-            System.out.print("Digite a multa: ");
-            sc.nextLine();
-            BigDecimal multa = sc.nextBigDecimal();
-
+            String dataDevolucaoStr = "";
 
             LocalDate dataEmprestimo;
-            LocalDate dataDevolucao;
+
+
             try {
                 dataEmprestimo = LocalDate.parse(dataEmprestimoStr, formatter);
-                dataDevolucao = LocalDate.parse(dataDevolucaoStr, formatter);
             } catch (DateTimeParseException e) {
                 throw new Mensagem("Formato de data inválido. Use dd/MM/yyyy.");
             }
+
+            LocalDate dataDevolucao = null;
+            EstadoEmprestimo estado = EstadoEmprestimo.valueOf("ATIVO");
 
 
             for (Emprestimo e : emprestimoRepositorio.getMinhaLista()) {
@@ -60,7 +56,7 @@ public class EmprestimoServico {
                 }
             }
 
-            Emprestimo emprestimo = new Emprestimo(livroRepositorio.buscaPorId(idLivro), membroRepositorio.buscaPorId(idMembro), dataEmprestimo, dataDevolucao, estado, multa);
+            Emprestimo emprestimo = new Emprestimo(livroRepositorio.buscaPorId(idLivro), membroRepositorio.buscaPorId(idMembro), dataEmprestimo, dataDevolucao, estado, new BigDecimal(0));
 
             if (emprestimoRepositorio.salvar(emprestimo)) {
                 System.out.println("Emprestimo cadastrado com sucesso");
