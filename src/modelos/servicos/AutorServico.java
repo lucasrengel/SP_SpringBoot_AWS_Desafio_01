@@ -29,7 +29,7 @@ public class AutorServico {
         try {
             System.out.println("Digite o nome do autor: ");
             String nome = sc.nextLine();
-            System.out.println("Digite a data de nascimento: ");
+            System.out.println("Digite a data de nascimento (dd/MM/yyyy): ");
             String dataNascimentoStr  = sc.nextLine();
             System.out.println("Digite a nacionalidade: ");
             String nacionalidade = sc.nextLine();

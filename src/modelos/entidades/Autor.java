@@ -32,7 +32,6 @@ public class Autor extends Pessoa{
         return super.getId();
     }
 
-
     public String getNome() {
         return super.getNome();
     }
@@ -65,4 +64,5 @@ public class Autor extends Pessoa{
     public String toString() {
         return super.toString() + ", Data de nascimento: " + getDataNascimento() + ", Nacionalidade: " + getNacionalidade() + ", Biografia: " + getBiografia() + ".\n";
     }
+
 }
