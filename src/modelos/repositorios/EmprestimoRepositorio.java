@@ -34,7 +34,10 @@ public class EmprestimoRepositorio {
                 Livro livro = livroRepositorio.buscaPorId(res.getInt("id_livro"));
                 Membro membro = membroRepositorio.buscaPorId(res.getInt("id_membro"));
                 LocalDate dataEmprestimo = res.getDate("dataEmprestimo").toLocalDate();
-                LocalDate dataDevolucao = res.getDate("dataDevolucao").toLocalDate();
+                LocalDate dataDevolucao = null;
+                if (res.getDate("dataDevolucao") != null) {
+                    dataDevolucao = res.getDate("dataDevolucao").toLocalDate();
+                }
                 EstadoEmprestimo estado = EstadoEmprestimo.valueOf(res.getString("estado"));
                 BigDecimal multa = res.getBigDecimal("multa");
 
@@ -62,7 +65,11 @@ public class EmprestimoRepositorio {
             stmt.setInt(2, objeto.getLivro().getId());
             stmt.setInt(3, objeto.getMembro().getId());
             stmt.setString(4, objeto.getDataEmprestimo().toString());
-            stmt.setString(5, objeto.getDataDevolucao().toString());
+            if (objeto.getDataDevolucao() != null) {
+                stmt.setString(5, objeto.getDataDevolucao().toString());
+            } else {
+                stmt.setNull(5, java.sql.Types.DATE);
+            }
             stmt.setString(6, objeto.getEstado().toString());
             stmt.setBigDecimal(7, objeto.getMulta());
 
