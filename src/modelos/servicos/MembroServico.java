@@ -2,6 +2,8 @@ package modelos.servicos;
 
 import excecoes.Mensagem;
 import modelos.entidades.Membro;
+import modelos.relatorios.RelatorioAutores;
+import modelos.relatorios.RelatorioMembros;
 import modelos.repositorios.MembroRepositorio;
 
 import java.time.LocalDate;
@@ -15,13 +17,8 @@ public class MembroServico {
     private final MembroRepositorio membroRepositorio = new MembroRepositorio();
 
     public void listarMembros(){
-        if(membroRepositorio.getMinhaLista().isEmpty()){
-            System.out.println("\nNenhum Membro cadastrado");
-            return;
-        }
-        for(Object m: MembroRepositorio.minhaLista) {
-            System.out.println(m);
-        }
+        RelatorioMembros relatorioMembros = new RelatorioMembros(membroRepositorio);
+        relatorioMembros.gerarRelatorio();
     }
 
     public void cadastrarMembro(){
