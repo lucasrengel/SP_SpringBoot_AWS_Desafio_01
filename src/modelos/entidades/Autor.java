@@ -1,11 +1,8 @@
 package modelos.entidades;
 
-import jakarta.persistence.Entity;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@Entity
 public class Autor extends Pessoa{
 
     private LocalDate dataNascimento;
