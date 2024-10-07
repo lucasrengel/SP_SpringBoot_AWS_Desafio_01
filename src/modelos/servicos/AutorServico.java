@@ -2,6 +2,7 @@ package modelos.servicos;
 
 import excecoes.Mensagem;
 import modelos.entidades.Autor;
+import modelos.relatorios.RelatorioAutores;
 import modelos.repositorios.AutorRepositorio;
 
 import java.time.LocalDate;
@@ -15,13 +16,8 @@ public class AutorServico {
     private final AutorRepositorio autorRepositorio = new AutorRepositorio();
 
     public void listarAutores(){
-        if(autorRepositorio.getMinhaLista().isEmpty()){
-            System.out.println("\nNenhum Autor cadastrado");
-            return;
-        }
-        for(Object a: AutorRepositorio.minhaLista) {
-            System.out.println(a);
-        }
+        RelatorioAutores relatorioAutores = new RelatorioAutores(autorRepositorio);
+        relatorioAutores.gerarRelatorio();
     }
 
     public void cadastrarAutor(){

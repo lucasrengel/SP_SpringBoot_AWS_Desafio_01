@@ -3,6 +3,7 @@ package modelos.servicos;
 import excecoes.Mensagem;
 import modelos.entidades.Autor;
 import modelos.entidades.Livro;
+import modelos.relatorios.RelatorioLivros;
 import modelos.repositorios.AutorRepositorio;
 import modelos.repositorios.LivroRepositorio;
 
@@ -18,13 +19,8 @@ public class LivroServico {
     private final AutorRepositorio autorRepositorio = new AutorRepositorio();
 
     public void listarLivros(){
-        if(livroRepositorio.getMinhaLista().isEmpty()){
-            System.out.println("\nNenhum Livro cadastrado");
-            return;
-        }
-        for(Object l: LivroRepositorio.minhaLista) {
-            System.out.println(l);
-        }
+        RelatorioLivros relatorioLivros = new RelatorioLivros(livroRepositorio);
+        relatorioLivros.gerarRelatorio();
     }
 
     public void cadastrarLivro(){
