@@ -1,14 +1,11 @@
 package aplicacao;
 
 import bd.BD;
-import excecoes.Mensagem;
-import modelos.entidades.Autor;
-import modelos.entidades.Membro;
 import modelos.servicos.AutorServico;
+import modelos.servicos.LivroServico;
+import modelos.servicos.MembroServico;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Programa {
@@ -20,9 +17,14 @@ public class Programa {
 
         int n = 0;
 
-        while (n != 4) {
+        while (n != 5) {
+            System.out.println("-------------");
             System.out.println("1) Autor");
-            System.out.println("4) Sair");
+            System.out.println("2) Membro");
+            System.out.println("3) Livro");
+            System.out.println("4) Emprestimo");
+            System.out.println("5) Sair");
+            System.out.println("-------------");
             System.out.print("Escolha uma opção: ");
 
             n = sc.nextInt();
@@ -35,59 +37,40 @@ public class Programa {
 
                     n = sc.nextInt();
 
-                    if(n == 1){
-                        try {
-                            System.out.println("Digite o nome do autor: ");
-                            sc.nextLine();
-                            String nome = sc.nextLine();
-                            System.out.println("Digite a data de nascimento: ");
-                            String dataNascimentoStr  = sc.nextLine();
-                            System.out.println("Digite a nacionalidade: ");
-                            String nacionalidade = sc.nextLine();
-                            System.out.println("Digite a biografia: ");
-                            String biografia = sc.nextLine();
-
-                            if (nome.length() < 2) {
-                                throw new Mensagem("Nome deve conter ao menos 2 caracteres");
-                            }
-
-                            LocalDate dataNascimento;
-                            try {
-                                dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
-                            } catch (DateTimeParseException e) {
-                                throw new Mensagem("Formato de data inválido. Use dd/MM/yyyy.");
-                            }
-
-                            for (Autor a : autorServico.getMinhaLista()) {
-                                if (a.getNome().equalsIgnoreCase(nome)) {
-                                    throw new Mensagem("Esse autor já está cadastrado!");
-                                }
-                            }
-
-                            Autor autor = new Autor(nome, dataNascimento, nacionalidade, biografia);
-
-                            if (autorServico.cadastraAutor(autor)) {
-                                System.out.println("Autor cadastrado com sucesso");
-                            }
-                        } catch (Mensagem erro) {
-                            System.out.println(erro.getMessage());
-                        }
+                    if (n == 1) {
+                        autorServico.cadastrarAutor();
                     }
-                    if(n == 2){
-                        if(autorServico.getMinhaLista().isEmpty()){
-                            System.out.println("\nNenhum Autor cadastrado");
-                            break;
-                        }
-                        for(Object a: AutorServico.minhaLista) {
-                            System.out.println(a);
-                        }
+                    if (n == 2) {
+                        autorServico.listarAutores();
                     }
                     break;
                 case 2:
-                    System.out.println("Você escolheu a Opção 2.");
+                    MembroServico membroServico = new MembroServico();
+                    System.out.println("\n1) Cadastrar Membro");
+                    System.out.println("2) Imprimir Membros");
+
+                    n = sc.nextInt();
+
+                    if (n == 1) {
+                        membroServico.cadastrarMembro();
+                    }
+                    if (n == 2) {
+                        membroServico.listarMembros();
+                    }
                     break;
                 case 3:
-                    System.out.println("Você escolheu a Opção 3.");
+                    LivroServico livroServico = new LivroServico();
+                    System.out.println("\n1) Cadastrar Livro");
+                    System.out.println("2) Imprimir Livros");
+
+                    n = sc.nextInt();
+
+                    if (n == 1) {
+                        livroServico.cadastrarLivro();
+                    }
+                    if (n == 2) {
+                        livroServico.listarLivros();
+                    }
                     break;
                 case 4:
                     System.out.println("Saindo do programa...");
