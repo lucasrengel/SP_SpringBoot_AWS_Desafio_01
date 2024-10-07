@@ -19,14 +19,15 @@ public class Emprestimo {
     public Emprestimo() {
     }
 
-    public Emprestimo(Livro livro, Membro membro, LocalDate dataEmprestimo, LocalDate dataDevolucao, EstadoEmprestimo estado, BigDecimal multa) {
+    public Emprestimo(Livro livro, Membro membro, LocalDate dataEmprestimo, LocalDate dataDevolucao,EstadoEmprestimo estado, BigDecimal multa) {
         this.livro = livro;
         this.membro = membro;
         this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
-        this.estado = estado;
-        this.multa = multa;
+        this.dataDevolucao = null;
+        this.estado = EstadoEmprestimo.valueOf("ATIVO");
+        this.multa = new BigDecimal(0);
     }
+
 
     public Emprestimo(int id, Livro livro, Membro membro, LocalDate dataEmprestimo, LocalDate dataDevolucao, EstadoEmprestimo estado, BigDecimal multa) {
         this.id = id;
