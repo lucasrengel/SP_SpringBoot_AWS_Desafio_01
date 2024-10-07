@@ -6,7 +6,7 @@ public class Livro {
 
     private int id;
     private String titulo;
-    private Autor autor;
+    private Autor idAutor;
     private LocalDate dataPublicacao;
     private Long isbn;
     private String genero;
@@ -15,19 +15,19 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(String titulo, Autor autor, LocalDate dataPublicacao, Long isbn, String genero, int quantidade) {
+    public Livro(String titulo, Autor idAutor, LocalDate dataPublicacao, Long isbn, String genero, int quantidade) {
         this.titulo = titulo;
-        this.autor = autor;
+        this.idAutor = idAutor;
         this.dataPublicacao = dataPublicacao;
         this.isbn = isbn;
         this.genero = genero;
         this.quantidade = quantidade;
     }
 
-    public Livro(int id, String titulo, Autor autor, LocalDate dataPublicacao, Long isbn, String genero, int quantidade) {
+    public Livro(int id, String titulo, Autor idAutor, LocalDate dataPublicacao, Long isbn, String genero, int quantidade) {
         this.id = id;
         this.titulo = titulo;
-        this.autor = autor;
+        this.idAutor = idAutor;
         this.dataPublicacao = dataPublicacao;
         this.isbn = isbn;
         this.genero = genero;
@@ -43,11 +43,11 @@ public class Livro {
     }
 
     public Autor getAutor() {
-        return autor;
+        return idAutor;
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
+    public void setAutor(Autor idAutor) {
+        this.idAutor = idAutor;
     }
 
     public LocalDate getDataPublicacao() {
@@ -88,5 +88,14 @@ public class Livro {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo: " + getTitulo() + ", Autor: " +
+                this.idAutor.getNome() + ", Data de publicacao: " +
+                getDataPublicacao() + ", ISBN: " + getIsbn()
+                + ", Genero: " + getGenero() + ", Quantidade: " +
+                getQuantidade() + ".\n";
     }
 }
