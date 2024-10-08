@@ -61,7 +61,7 @@ git clone https://github.com/lucasrengel/SP_SpringBoot_AWS_Desafio_01.git
 - Você pode usar o script SQL fornecido (script.sql) ou abrir o arquivo e copiar e colar na Query do MySQL. Siga os passos abaixo para executar o script no MySQL Workbench:
   - Inicie o MySQL Workbench e conecte-se ao seu servidor MySQL.
   - Importar o script SQL: No menu, vá para Server > Data Import
-  - Em Import Options escolha a opção Import from Self-Contained File e selecione o arquivo script.sql onde foi salvo no computador.
+  - Em Import Options escolha a opção Import from Self-Contained File e selecione o arquivo script.sql que se encontra na pasta do projeto.
   - Para executar o script clique em Start Import.
 
 - Após a execução, você pode verificar se o Schema e as tabelas foram criadas corretamente expandindo o banco de dados no painel Navigator e visualizando as tabelas.
