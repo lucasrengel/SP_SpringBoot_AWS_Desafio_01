@@ -9,7 +9,6 @@ import modelos.repositorios.LivroRepositorio;
 import modelos.repositorios.MembroRepositorio;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -39,6 +38,12 @@ public class EmprestimoServico {
             String dataEmprestimoStr = sc.nextLine();
 
             LocalDate dataEmprestimo;
+
+            BigDecimal multaPendente = emprestimoRepositorio.buscaPorId(idMembro).getMulta();
+            if (multaPendente.compareTo(BigDecimal.ZERO) > 0) {
+                throw new Mensagem("Voce tem multas pendentes, pague antes de fazer um novo emprestimo");
+            }
+
 
             try {
                 dataEmprestimo = LocalDate.parse(dataEmprestimoStr, formatter);
