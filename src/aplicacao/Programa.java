@@ -1,6 +1,8 @@
 package aplicacao;
 
 import bd.BD;
+import modelos.relatorios.RelatorioEmprestimo;
+import modelos.repositorios.EmprestimoRepositorio;
 import modelos.servicos.AutorServico;
 import modelos.servicos.EmprestimoServico;
 import modelos.servicos.LivroServico;
@@ -14,15 +16,18 @@ public class Programa {
         BD.getConexao();
         Scanner sc = new Scanner(System.in);
 
+
+
         int n = 0;
 
-        while (n != 5) {
+        while (n != 6) {
             System.out.println("-------------");
             System.out.println("1) Autor");
             System.out.println("2) Membro");
             System.out.println("3) Livro");
             System.out.println("4) Emprestimo");
-            System.out.println("5) Sair");
+            System.out.println("5) Relatorios");
+            System.out.println("6) Sair");
             System.out.println("-------------");
             System.out.print("Escolha uma opção: ");
 
@@ -90,7 +95,18 @@ public class Programa {
                     }
                     break;
                 case 5:
-                    System.out.println("Saindo do programa...");
+                    RelatorioEmprestimo relatorioEmprestimo = new RelatorioEmprestimo(new EmprestimoRepositorio());
+                    System.out.println("1) Livros Emprestados");
+                    System.out.println("2) Membros com multa");
+
+                    n = sc.nextInt();
+
+                    if (n == 1) {
+                        relatorioEmprestimo.gerarLivrosEmprestados();
+                    }
+                    if (n == 2) {
+                        relatorioEmprestimo.gerarMembrosComMultas();
+                    }
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
