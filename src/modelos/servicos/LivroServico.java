@@ -1,7 +1,6 @@
 package modelos.servicos;
 
 import excecoes.Mensagem;
-import modelos.entidades.Autor;
 import modelos.entidades.Livro;
 import modelos.relatorios.RelatorioLivros;
 import modelos.repositorios.AutorRepositorio;

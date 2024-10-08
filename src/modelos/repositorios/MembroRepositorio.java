@@ -1,7 +1,6 @@
 package modelos.repositorios;
 
 import bd.BD;
-import modelos.entidades.Livro;
 import modelos.entidades.Membro;
 
 import java.sql.*;

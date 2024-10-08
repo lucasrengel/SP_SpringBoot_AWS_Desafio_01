@@ -2,7 +2,6 @@ package modelos.servicos;
 
 import excecoes.Mensagem;
 import modelos.entidades.Membro;
-import modelos.relatorios.RelatorioAutores;
 import modelos.relatorios.RelatorioMembros;
 import modelos.repositorios.MembroRepositorio;
 

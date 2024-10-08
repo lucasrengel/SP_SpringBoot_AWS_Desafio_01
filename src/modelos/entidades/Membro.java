@@ -1,7 +1,6 @@
 package modelos.entidades;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +12,6 @@ public class Membro extends Pessoa {
     private LocalDate dataAssociacao;
     private List<Emprestimo> emprestimos = new ArrayList<>();
 
-
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Membro() {
     }

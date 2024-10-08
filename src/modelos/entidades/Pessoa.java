@@ -1,10 +1,7 @@
 package modelos.entidades;
 
 
-import java.io.Serializable;
-
-public class Pessoa implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Pessoa {
 
     private int id;
     private String nome;

@@ -1,15 +1,12 @@
 package modelos.entidades;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Autor extends Pessoa{
 
     private LocalDate dataNascimento;
     private String nacionalidade;
     private String biografia;
-
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Autor() {
     }

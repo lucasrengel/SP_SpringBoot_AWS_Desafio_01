@@ -73,6 +73,8 @@ public class EmprestimoRepositorio {
             stmt.setString(6, objeto.getEstado().toString());
             stmt.setBigDecimal(7, objeto.getMulta());
 
+
+
             stmt.execute();
             stmt.close();
 
